@@ -18,7 +18,9 @@ Logfin is a personal finance management application designed to help you track y
 
 When you register and use our App, we collect the following information:
 
-- **Account Information**: Name, email address, and password (encrypted)
+- **Account Information:** Name, email address, and profile picture 
+  obtained through Google Sign-In authentication. We do not store 
+  your Google password — authentication is handled securely by Google.
 - **Transaction Data**: Manually entered transaction details including amount, category, date, and notes
 - **Budget Information**: Budget limits and categories you create
 - **Settings Preferences**: App configuration and notification preferences
@@ -179,6 +181,13 @@ The App requires the following permissions:
 - **Service Providers**: With trusted third-party service providers who assist in operating our App (e.g., cloud hosting providers), under strict confidentiality agreements
 - **With Your Consent**: When you explicitly authorize us to share specific information
 
+### Authentication Services
+
+We use Google Sign-In (provided by Google LLC) for user authentication. 
+When you sign in with Google, we receive your name, email address, and 
+profile picture from your Google account. This data is governed by 
+Google's Privacy Policy (https://policies.google.com/privacy).
+
 ## AI and Data Processing
 
 Logfin uses Artificial Intelligence (AI) to simplify transaction data entry and improve accuracy. AI is used in three key areas:
@@ -252,15 +261,15 @@ You are advised to review this Privacy Policy periodically for any changes. Chan
 
 ## International Data Transfers
 
-If you use our App from outside [Your Country], please be aware that your information may be transferred to, stored, and processed in [Your Country] where our servers are located. By using the App, you consent to this transfer.
+If you use our App from outside Indonesia, please be aware that your information may be transferred to, stored, and processed in Indonesia where our servers are located. By using the App, you consent to this transfer.
 
 ## Contact Us
 
 If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us at:
 
-**Email**: [your-email@example.com]  
-**Address**: [Your Physical Address]  
-**Support**: [In-app support or website URL]
+- **Email**: logfin.help@gmail.com
+- **Address**: Sukapura, Dayeuhkolot District, Bandung Regency, West Java 40267
+- **Support**: In-app support feedback feature
 
 ## Consent
 
@@ -292,13 +301,3 @@ By using our App, you acknowledge that you have read and understood this Privacy
 *This Privacy Policy is compliant with Google Play Store requirements, GDPR principles, and general privacy best practices.*
 
 ---
-
-## Instructions for Publishing
-
-Before uploading to Google Play Store, please update the following information in the **Contact Us** section:
-
-- **Email**: Replace with your actual support email address
-- **Address**: Add your company's physical address (required by Google Play)
-- **Support**: Add your website URL or in-app support contact method
-
-These details are required by Google Play Store policies for all published applications.
