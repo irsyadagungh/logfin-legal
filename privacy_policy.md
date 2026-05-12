@@ -1,297 +1,278 @@
 # Privacy Policy
 
-**Last updated: February 15, 2026**
+**Last updated: May 12, 2026**
 
 ## Introduction
 
-This Privacy Policy describes how Logfin ("we," "our," or "the App") collects, uses, and protects your information when you use our mobile application. We are committed to protecting your privacy and ensuring the security of your personal information.
+This Privacy Policy describes how Logfin ("we," "our," or the "App") collects, uses, stores, and protects your information when you use our mobile application. We are committed to protecting your privacy and being transparent about how your data is processed.
 
-By using our App, you agree to the collection and use of information in accordance with this Privacy Policy.
+By using Logfin, you agree to the collection and use of information in accordance with this Privacy Policy.
 
 ## About Logfin
 
-Logfin is a personal finance management application designed to help you track your income and expenses, manage budgets, and gain insights into your spending habits. The App provides tools for manual transaction entry, automatic transaction capture from notifications, and receipt scanning to simplify financial record-keeping.
+Logfin is a personal finance management application designed to help you track income and expenses, manage budgets, and gain insights into your spending habits. The App provides tools for manual transaction entry, automatic transaction detection from supported financial app notifications, AI-assisted text input, and receipt scanning.
 
 ## Information We Collect
 
 ### 1. Information You Provide Directly
 
-When you register and use our App, we collect the following information:
+When you register and use the App, we may collect:
 
-- **Account Information:** Name, email address, and profile picture obtained through Google Sign-In authentication. We do not store your Google password — authentication is handled securely by Google.
-- **Transaction Data:** Manually entered transaction details including amount, category, date, and notes
-- **Budget Information:** Budget limits and categories you create
-- **Settings Preferences:** App configuration and notification preferences
+- **Account Information:** Name, email address, and profile picture obtained through Google Sign-In authentication. We do not store your Google password.
+- **Transaction Data:** Transaction details such as amount, merchant, category, date, notes, transaction type, and transaction items.
+- **Budget Information:** Budget limits, categories, and related budget settings.
+- **Settings Preferences:** App configuration, language, theme, notification preferences, and auto-detect settings.
+- **Feedback Data:** Messages, logs, device/app information, and optional attachments you submit through the feedback feature.
 
-### 2. Information Collected Automatically
+### 2. Information Collected Automatically or With Permission
 
 #### Camera Access
-- **Purpose:** To scan receipts or transaction documents for automatic data entry
-- **Data Retention:** Images captured through the camera are NOT stored on our servers or your device after processing
-- **Processing:** Images are processed in real-time using AI to extract transaction information (amount, merchant, date)
-- **AI Usage:** Computer vision AI analyzes the receipt image to identify and extract relevant transaction details
-- **Usage Limit:** Free users may scan up to 5 receipts. Additional scan quota will be available in a future paid tier.
-- **Future Consideration:** We may implement image storage in future versions if we identify a beneficial use case, and will update this policy accordingly
+
+- **Purpose:** To scan receipts or transaction documents for automatic transaction entry.
+- **Processing:** Receipt images may be sent securely to our backend and AI services for processing. AI analyzes the image to extract transaction information such as amount, merchant, date, and transaction type.
+- **Storage:** Receipt images are not stored permanently in our database. They may temporarily exist during upload, processing, or device/server caching, and are discarded after processing.
+- **AI Usage:** Computer vision AI analyzes receipt images only to identify and extract relevant transaction details.
+- **Usage Limit:** Free users may scan up to 5 receipts. Additional scan quota may be available in a future paid tier.
 
 #### Notification Access
-- **Purpose:** To automatically capture transaction notifications from banking and e-wallet apps you select
-- **Scope:** Only reads notifications from apps you explicitly authorize (banking and e-wallet apps only)
-- **Data Collected:** Transaction amount, merchant name, date, and time from notification text
-- **User Control:** You can enable/disable notification reading at any time and select which specific apps to monitor
-- **Data Usage:** Notification data is used solely for recording transactions in your expense history
-- **AI Processing:** Notification text is processed using AI to extract transaction details (amount, merchant, date/time) because bank notification formats vary significantly. This is more reliable than traditional pattern matching methods.
 
-**Notification Action Buttons**
+- **Purpose:** To automatically detect transaction notifications from banking and e-wallet apps selected by you.
+- **Scope:** The App only monitors supported banking and e-wallet applications that are explicitly listed and selected by you. The App does not monitor all installed apps.
+- **Data Collected:** Notification text may include transaction amount, merchant or recipient name, date, time, and related transaction context.
+- **User Control:** You can enable or disable notification reading at any time and select which supported apps to monitor.
+- **Data Usage:** Notification data is used to help create transaction records in your expense history.
+- **AI Processing:** Notification text may be processed using AI through our backend to extract transaction details because banking and e-wallet notification formats vary significantly.
 
-When you receive a transaction notification, you can interact with it using action buttons:
+#### Raw Notification Text and Debugging
 
-1. **Save Button:** Automatically extracts transaction data from the notification using AI and saves it to your transaction history
-2. **Edit Button:** Extracts transaction data using AI and opens the edit screen, allowing you to review and modify the details before saving
+Raw notification text may be stored in our database when necessary to support transaction detection, debugging, error analysis, and user-requested support. We use this information to understand whether AI parsing succeeded or failed and to improve the reliability of the auto-detect transaction feature.
 
-**Why AI is Used:**
-- Different banks and e-wallets use different notification formats
-- AI can accurately extract transaction information regardless of format variations
-- Traditional pattern matching (regex) would be complex, fragile, and difficult to maintain across multiple bank formats
+We do not sell raw notification text, use it for advertising, or access it for unrelated purposes. Access is limited and used only when needed for support, debugging, service operation, or service improvement.
 
-**Notification Listener Service Requirements**
+#### Notification Action Buttons
 
-To ensure the notification listener works reliably and doesn't stop unexpectedly, the App implements several technical measures:
+When you receive a supported transaction notification, Logfin may provide action buttons such as:
 
-1. **Background Isolate:** The notification listener runs in a background isolate (separate execution thread) to ensure continuous operation without blocking the main app
-2. **Sticky Service:** The notification listener automatically restarts if stopped by the system, ensuring continuous monitoring of your selected banking/e-wallet notifications
-3. **Service Binding:** The App binds the notification listener service to keep it active and prevent the Android system from terminating it during memory cleanup
-4. **Auto-restart on Termination:** If the Android system stops the notification listener service (due to memory pressure or other reasons), it will automatically restart itself — this is NOT the same as launching at boot
-5. **Battery Optimization Exemption:** Prevents the system from stopping the notification listener to save battery, ensuring consistent transaction capture
-6. **Auto-start Permission (Chinese OEM Devices):** On devices from manufacturers such as Xiaomi, OPPO, Vivo, and Realme, the App may guide you to enable Auto-start permission. This ensures the notification listener can restart automatically if terminated by the device's aggressive battery management system. This permission is optional but strongly recommended if you wish to use the auto-detect transaction feature.
+1. **Save:** AI extracts transaction details and saves the transaction.
+2. **Edit:** AI extracts transaction details and opens an edit screen so you can review and modify the data before saving.
 
-**Important Clarifications:**
-- **Boot Launch:** The App does NOT automatically launch when your device boots up or restarts. On certain Chinese OEM devices (Xiaomi, OPPO, Vivo, Realme), Auto-start permission — if granted by you — allows the notification listener service to restart after being terminated by the system. This is not the same as launching the full app at boot.
-- **Auto-restart:** The service only restarts automatically if the system terminates it while the app is already running
-- **NO Foreground Service:** We use background isolate technology instead of foreground services, so you won't see a persistent notification about the service running
-- **User Control:** The notification listener only runs when you have explicitly enabled notification monitoring in the app settings
+#### Device Information and Installed Apps
 
-**Your Control:**
-- You can disable the notification listener feature at any time
-- Disabling it will stop all automatic notification reading
-- The service will only run if you have enabled notification monitoring in settings
-- Auto-start permission (on supported devices) can be revoked at any time through your device settings
-
-#### Device Information
-- **Installed Applications:** The App reads your installed applications list only to identify banking and e-wallet apps available for notification monitoring
-- **Purpose:** To display available banking/e-wallet apps in the notification settings menu
-- **Limitation:** We only detect and display banking and e-wallet applications
+- **Installed Applications:** The App checks only for a predefined list of supported banking and e-wallet applications.
+- **Purpose:** To display available supported financial apps in the notification settings menu so you can choose which apps to monitor.
+- **Limitation:** The App does not request broad visibility of all apps installed on your device. It only checks for specific supported banking and e-wallet package names.
 
 ## How We Use Your Information
 
-We use the collected information for the following purposes:
+We use collected information to:
 
-1. **Account Management:** To create and manage your user account across devices
-2. **Income & Expense Tracking:** To record, categorize, and display your income and expense transactions
-3. **Budget Management:** To help you set budget limits for different categories and monitor your spending against those budgets
-4. **Financial Analytics:** To provide spending statistics, income vs. expense analysis, and financial insights
-5. **Data Synchronization:** To sync your financial data across multiple devices using our secure servers
-6. **Notification Processing:** To automatically capture and record transaction data from authorized banking/e-wallet app notifications
-7. **App Functionality:** To provide core features including transaction history, category management, budget tracking, and settings customization
+1. Create and manage your account.
+2. Record and categorize income and expense transactions.
+3. Provide transaction history, financial summaries, and spending insights.
+4. Manage budgets and compare your spending against budget limits.
+5. Sync data across devices and provide backup/restore functionality.
+6. Automatically detect transactions from supported financial app notifications.
+7. Process receipt scans and text input using AI to extract transaction information.
+8. Provide notification history and auto-detect settings.
+9. Improve reliability, debug issues, and respond to support requests.
+10. Maintain security, prevent abuse, and operate the App.
 
-**Important Note:** Budgets are spending limits you set manually for each category. The App then compares your actual expense transactions in that category against your budget limit to show you how much you've spent versus your budget. Budget limits themselves are set by you, but the spending calculations use your expense transaction history filtered by category. Income transactions are not included in budget calculations.
+Budgets are spending limits you set manually for each category. The App compares your actual expense transactions against those budget limits. Income transactions are not included in budget spending calculations.
+
+## AI and Data Processing
+
+Logfin uses Artificial Intelligence (AI) to simplify transaction data entry and improve accuracy. AI processing is routed through our backend service and may use different AI providers, including Google Gemini, Cerebras, Groq, or other providers we may integrate in the future.
+
+AI is used in three key areas:
+
+### 1. Receipt Scanning
+
+- Receipt images may be sent securely to our backend and AI services for transaction extraction.
+- **Data Extracted:** Amount, merchant name, date, transaction type, and other relevant transaction details.
+- **Image Storage:** Receipt images are not stored permanently in our database. They may temporarily exist during upload or processing and are discarded after processing.
+
+### 2. Text Input Processing
+
+- When you use text input, AI processes your natural language input to extract transaction details.
+- Example: "Lunch at McDonald's 50k" may be converted into a transaction with merchant, category, and amount.
+- This helps you add transactions more quickly.
+
+### 3. Notification Data Extraction
+
+- AI processes notification text from supported banking and e-wallet apps you selected.
+- AI helps extract transaction data more reliably than fixed pattern matching because notification formats vary significantly.
+- Extracted data may include amount, merchant or recipient name, date/time, and transaction type.
+
+### AI Processing Privacy
+
+- AI is used only to extract transaction information and support Logfin features.
+- Your data is not sold to third parties or used for advertising.
+- We do not intentionally use your personal financial data to train public AI models.
+- AI processing is performed through secure backend communication.
+- Extracted data is used to create or suggest transaction entries in your account.
 
 ## Data Storage and Security
 
 ### Hybrid Storage Architecture
-Logfin uses a combination of local and server storage to provide you with the best experience:
 
-**Local Storage (On Your Device)**
+Logfin uses a combination of local and server storage.
+
+**Local Storage on Your Device**
+
 - Transaction data cache for offline access
 - App settings and preferences
 - Temporary data for quick access
 
-**Server Storage (Cloud)**
-- Your account information (name, email, profile picture)
-- Transaction history (income and expense records)
-- Budget configurations and categories
+**Server Storage**
 
-This allows you to:
-- Access your data across multiple devices
-- Restore your data if you change devices
-- Keep your financial records securely backed up
+- Account information such as name, email address, and profile picture
+- Transaction history
+- Budget configurations and categories
+- Notification data needed for transaction detection, debugging, or support
+- Feedback and support data you submit
+
+This allows you to access your data across multiple devices, restore data when changing devices, and keep your financial records backed up.
 
 ### Security Measures
 
-**Data Encryption**
-- All data transmitted between your device and our servers uses SSL/TLS encryption
-- Sensitive financial data is encrypted both in transit and at rest on our servers
+**Data Transmission**
+
+- Data transmitted between your device and our servers uses SSL/TLS encryption.
 
 **Server Security**
-- Secure, encrypted database storage
-- Regular security audits and updates
-- Access controls and authentication protocols
-- Data backup and disaster recovery systems
+
+- Our backend database is hosted on PostgreSQL infrastructure.
+- We use access controls, authentication protocols, and operational security practices to protect stored data.
+- We limit access to user data to what is necessary for operating, debugging, and supporting the App.
 
 **Local Security**
-- Encrypted local storage on your device
-- Secure data caching mechanisms
-- Automatic data synchronization with server
+
+- Authentication tokens are stored using secure storage mechanisms on your device.
+- Local app data is stored in the app’s private storage area.
 
 ## Permissions Required
 
 ### Required Permissions
 
-1. **Internet Access:** For syncing your data with our secure servers and user authentication
-2. **Camera:** To scan receipts for transaction data extraction with AI (images are not saved)
-3. **Network State:** To detect internet connectivity for data synchronization
+1. **Internet Access:** Used for authentication, syncing data, AI processing, and communication with our backend.
+2. **Camera:** Used to scan receipts for AI-assisted transaction extraction.
+3. **Network State:** Used to detect connectivity for syncing and offline behavior.
 
-### Optional Permissions (For Notification Monitoring Feature)
+### Optional Permissions for Auto-Detect Transaction
 
-4. **Notification Access:** To read transaction notifications from selected banking/e-wallet apps
-   - You can grant or revoke this permission at any time
-   - You control which apps' notifications are read
-   - Used exclusively for automatic transaction recording
-   - Notification text is processed by AI to extract transaction details
+4. **Notification Access**
+   - Used to read transaction notifications from supported banking and e-wallet apps you select.
+   - You can grant or revoke this permission at any time.
+   - Used exclusively for automatic transaction detection and recording.
 
-5. **Battery Optimization Exemption:**
-   - Ensures notification listener service runs continuously in the background
-   - Prevents Android from stopping the service to save battery
-   - Required for reliable automatic transaction capture
-   - **User Action Required:** You'll be guided to manually exempt Logfin from battery optimization in device settings
+5. **Battery Optimization Exemption**
+   - Helps keep notification detection reliable.
+   - Prevents Android from stopping the listener due to battery optimization.
+   - You must manually grant this permission if you choose to use it.
 
-6. **Auto-start (Chinese OEM Devices — Xiaomi, OPPO, Vivo, Realme only):**
-   - Allows the notification listener service to restart automatically if terminated by the device system
-   - Optional but strongly recommended for reliable auto-detect transaction feature on supported devices
-   - **User Action Required:** You'll be guided step-by-step within the App to enable this permission
-   - Can be revoked at any time through your device settings
+6. **Auto-start Permission on Certain Devices**
+   - On some devices from manufacturers such as Xiaomi, OPPO, Vivo, and Realme, the App may guide you to enable Auto-start permission.
+   - This helps the notification listener restart if terminated by aggressive battery management.
+   - This permission is optional and can be revoked through device settings.
 
-**Important Notes:**
-- Permissions 4–6 are ONLY needed if you choose to use the automatic notification monitoring feature
-- You can use Logfin's core features (manual entry, receipt scanning, budgeting, text input with AI) without granting these permissions
-- **No Automatic Boot Launch:** Logfin does NOT automatically launch when your device starts or reboots
-- **Background Processing:** We use background isolate technology instead of foreground services, so there's no persistent notification
+### Important Permission Notes
+
+- Notification monitoring permissions are only needed if you choose to use the auto-detect transaction feature.
+- You can use core features such as manual entry, budgeting, and receipt scanning without enabling notification monitoring.
+- Logfin does not automatically launch the full app when your device starts.
+- You can disable notification monitoring at any time.
 
 ## Data Sharing and Third Parties
 
-### We Do NOT:
-- Sell your personal information to third parties
-- Share your transaction data with advertisers
-- Provide your data to data brokers
-- Use your data for purposes other than providing App functionality
+### We Do Not
 
-### We MAY Share Data Only When:
-- **Required by Law:** When we have a good-faith belief that disclosure is necessary to comply with legal obligations
-- **Service Providers:** With trusted third-party service providers who assist in operating our App (e.g., cloud hosting providers), under strict confidentiality agreements
-- **With Your Consent:** When you explicitly authorize us to share specific information
+- Sell your personal information.
+- Share your transaction data with advertisers.
+- Provide your data to data brokers.
+- Use your financial data for advertising.
+
+### We May Share Data Only When
+
+- **Required by Law:** When necessary to comply with legal obligations.
+- **Service Providers:** With trusted providers that help operate the App, such as hosting, database, authentication, AI processing, and email/support services.
+- **With Your Consent:** When you explicitly authorize sharing.
 
 ### Authentication Services
 
-We use Google Sign-In (provided by Google LLC) for user authentication. When you sign in with Google, we receive your name, email address, and profile picture from your Google account. This data is governed by Google's Privacy Policy (https://policies.google.com/privacy).
+We use Google Sign-In provided by Google LLC. When you sign in with Google, we receive your name, email address, and profile picture from your Google account. This data is governed by Google's Privacy Policy: https://policies.google.com/privacy.
 
-## AI and Data Processing
+### AI Providers
 
-Logfin uses Artificial Intelligence (AI) to simplify transaction data entry and improve accuracy. AI is used in three key areas:
-
-### 1. Receipt Scanning (Camera)
-- When you scan a receipt with your camera, AI analyzes the image to extract transaction information
-- **Data Extracted:** Amount, merchant name, date, transaction type
-- **Image Storage:** Images are NOT stored — they are processed in real-time and immediately discarded after extraction
-- **Processing:** May occur on-device or through secure AI services depending on the feature
-- **Usage Limit:** Free users may perform up to 5 receipt scans. Additional quota will be available in a future paid tier.
-
-### 2. Text Input Processing
-- When you use the text input feature to add transactions, AI processes your natural language input
-- **Example:** "Lunch at McDonald's 50k" → AI extracts: Category: Food, Merchant: McDonald's, Amount: 50,000
-- **Purpose:** Allows you to quickly add transactions using conversational language instead of filling out forms
-
-### 3. Notification Data Extraction
-- AI processes notification text from your authorized banking/e-wallet apps
-- **Why AI:** Bank notification formats vary significantly (different structures, languages, abbreviations)
-- **Traditional methods** (regex/pattern matching) would be extremely complex and unreliable
-- **AI advantage:** Accurately extracts transaction data regardless of bank-specific formatting
-- **Data Extracted:** Transaction amount, merchant/recipient name, transaction date/time, transaction type
-- **Triggered by:**
-  - Save button on notification: AI extracts data and saves automatically
-  - Edit button on notification: AI extracts data and opens edit screen for your review
-
-### AI Processing Privacy
-- AI processing is used ONLY for extracting transaction information from the three sources above
-- Your transaction descriptions and data are NOT used to train AI models
-- We do not share your data with third-party AI services for training purposes
-- AI processing is performed securely with data encryption
-- Extracted data is only used to create transaction entries in your account
-
-## Your Rights and Choices
-
-You have the following rights regarding your data:
-
-1. **Access:** View all your stored data within the App
-2. **Modification:** Edit or update your transaction records, budgets, and account information
-3. **Deletion:** Delete individual transactions permanently from your account
-4. **Data Export:** Coming soon — we plan to provide CSV export of your transaction history in a future update
-5. **Notification Control:**
-   - Enable or disable notification reading at any time
-   - Select which apps' notifications to monitor
-   - Revoke notification access permission entirely
-6. **Opt-out:** Disable any optional features or data collection
-7. **Account Deletion:** In-app account deletion is not yet available. To request deletion of your account and associated data, please contact us at logfin.help@gmail.com or submit a request through the in-app feedback feature.
+AI processing may be performed through providers such as Google Gemini, Cerebras, Groq, or other providers integrated through our backend. Data sent for AI processing is used to provide Logfin features such as receipt scanning, text input parsing, and notification transaction extraction.
 
 ## Data Retention
 
-- **Account Data:** Stored on our servers for as long as you use the App, or until you request account deletion
-- **Transaction History:** Transactions are permanently and immediately deleted upon your request. Deleted transactions may temporarily remain in our database backups, which are maintained solely for disaster recovery purposes, for a limited period before being overwritten
-- **Categories & Budgets:** When deleted by you, categories and budgets are deactivated and hidden from active use but retained in our database to preserve the integrity of your existing transaction history and support future budget history features
-- **Camera Images:** Not stored anywhere — processed in real-time and immediately discarded after extracting transaction information
-- **Notification Data:** Converted to transaction records and stored as part of your transaction history
+- **Account Data:** Stored for as long as you use the App, or until you request account deletion.
+- **Transaction History:** Stored until you delete individual transactions or request account deletion.
+- **Notification Data:** Notification text and parsing results may be retained when needed for transaction detection, debugging, support, or error analysis.
+- **Categories and Budgets:** When deleted by you, categories and budgets may be deactivated and hidden from active use but retained where needed to preserve transaction history integrity.
+- **Receipt Images:** Receipt images are not stored permanently in our database and are discarded after processing.
+- **Feedback Data:** Stored as needed to respond to support requests and improve the App.
+- **Account Deletion:** When you request account deletion, we will manually delete your account and associated data from our backend database using administrative database operations until an automated deletion feature is available.
+
+## Your Rights and Choices
+
+You have the right to:
+
+1. **Access:** View your stored data in the App.
+2. **Modify:** Edit transaction records, budgets, categories, and settings.
+3. **Delete Transactions:** Delete individual transactions from your account.
+4. **Control Notifications:** Enable or disable notification reading and choose which supported apps to monitor.
+5. **Revoke Permissions:** Revoke camera, notification, battery, or auto-start permissions through the App or device settings.
+6. **Opt Out:** Disable optional features such as auto-detect transaction.
+7. **Request Account Deletion:** In-app account deletion is not yet available. To request deletion of your account and associated data, please contact us at logfin.help@gmail.com or submit a request through the in-app feedback feature. After verifying your request, we will manually delete your account and associated data from our backend database. We plan to provide an automated account deletion feature in a future update.
 
 ## Children's Privacy
 
-Our App is not intended for users under the age of 13. We do not knowingly collect personal information from children under 13. If we discover that we have collected information from a child under 13, we will promptly delete such information.
-
-## Changes to This Privacy Policy
-
-We may update our Privacy Policy from time to time. We will notify you of any changes by:
-- Posting the new Privacy Policy on this page
-- Updating the "Last updated" date
-- Sending an in-app notification for significant changes
-
-You are advised to review this Privacy Policy periodically for any changes. Changes are effective when posted.
+Logfin is not intended for users under the age of 13. We do not knowingly collect personal information from children under 13. If we discover that we have collected information from a child under 13, we will promptly delete such information.
 
 ## International Data Transfers
 
-If you use our App from outside Indonesia, please be aware that your information may be transferred to, stored, and processed in Indonesia where our servers are located. By using the App, you consent to this transfer.
+If you use the App from outside Indonesia, your information may be transferred to, stored, and processed in Indonesia or other locations where our service providers operate. By using the App, you consent to this processing as described in this Privacy Policy.
+
+## Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. We will notify users of changes by:
+
+- Posting the updated Privacy Policy on this page
+- Updating the "Last updated" date
+- Providing in-app notice for significant changes when appropriate
+
+You are advised to review this Privacy Policy periodically.
 
 ## Contact Us
 
-If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us at:
+If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us at:
 
 - **Email:** logfin.help@gmail.com
 - **Address:** Sukapura, Dayeuhkolot District, Bandung Regency, West Java 40267
-- **Support:** In-app support feedback feature
+- **Support:** In-app feedback feature
 
 ## Consent
 
-By using our App, you acknowledge that you have read and understood this Privacy Policy and agree to its terms and conditions.
+By using Logfin, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.
 
 ---
 
 ## Summary of Key Privacy Points
 
-✓ Logfin tracks your income and expenses with budgeting tools
-✓ Budgets compare your expense spending against limits you set per category
-✓ Data is stored both locally (for offline access) and on secure servers (for sync and backup)
-✓ AI is used to extract transaction data from: receipt images, text input, and bank notifications
-✓ Scanned receipt images are NOT saved - only processed by AI for data extraction
-✓ Free users can scan up to 5 receipts; additional quota coming in a future paid tier
-✓ You control which banking/e-wallet apps' notifications are monitored
-✓ Notification text is processed by AI (not regex) to handle varying bank formats
-✓ Save/Edit buttons on notifications trigger AI extraction of transaction details
-✓ Notification listener uses background isolate (not foreground service - no persistent notification)
-✓ Service auto-restarts only if terminated by Android (NOT at boot/startup)
-✓ On Xiaomi, OPPO, Vivo, and Realme devices, Auto-start permission may be requested (optional, user-controlled)
-✓ App does NOT automatically launch when device boots
-✓ We do NOT sell or share your personal data with third parties
-✓ Your data is NOT used to train AI models
-✓ Transactions are permanently deleted immediately upon your request
-✓ Categories and budgets are deactivated (not hard deleted) to preserve transaction history
-✓ All data is encrypted in transit and at rest
-✓ You have full control over permissions and features
+- Logfin helps track income, expenses, budgets, and transaction history.
+- Auto-detect transaction is optional and controlled by you.
+- Notification access is used only for supported banking and e-wallet apps you select.
+- The App checks only a predefined list of supported financial apps, not all installed apps.
+- Receipt images are not stored permanently and are discarded after processing.
+- Raw notification text may be retained when needed for transaction detection, debugging, support, and error analysis.
+- AI processing may use providers such as Gemini, Cerebras, Groq, or other providers through our backend.
+- Your data is not sold or used for advertising.
+- Authentication tokens are stored securely on your device.
+- Account deletion is currently handled manually after user request.
+- You can disable optional permissions and features at any time.
 
 ---
 
-*This Privacy Policy is compliant with Google Play Store requirements, UU PDP (Undang-Undang Perlindungan Data Pribadi No. 27 Tahun 2022), and general privacy best practices.*
+This Privacy Policy is intended to clearly describe Logfin's privacy practices and support compliance with applicable privacy and platform requirements.
